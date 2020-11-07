@@ -5,14 +5,21 @@ def compress_string(str)
     str.each_char do |char, idx|
         count = letter_count(str, char)
         compressed_string += "#{char}#{count}"
+        return str if compressed_string.length > str.length
     end
-
-    if compressed_string.length > str.length
-        return str
-    else
-        return compressed_string
-    end
+    
+    compressed_string
 end
+# checking the length of compressed string prevents us from spending extra
+# time on a compressed_string we may not have to return.
+# However, this also makes our code more repetitive having a helper method as another loop
+
+    # if compressed_string.length > str.length
+    #     return str
+    # else
+    #     return compressed_string
+    # end
+
 # keeping the letter count separate works well when we don't have many characters
 def letter_count(string, char)
     count = 0 # initialize count with 0
